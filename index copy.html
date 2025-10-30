@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>STR</title>
+
+  <!-- --------------- 核心：首次打开强制首页 hash ---------------- -->
+  <script>
+    (function() {
+      try {
+        const firstVisit = !sessionStorage.getItem('firstVisit');
+        if (firstVisit) {
+          const hash = window.location.hash;
+          // 如果 hash 不是首页，立即替换为首页
+          if (hash !== '#/' && hash !== '') {
+            window.location.replace('#/');
+          }
+          sessionStorage.setItem('firstVisit', 'true');
+        }
+      } catch(e) {
+        console.warn('Hash 修正失败', e);
+      }
+    })();
+  </script>
+
+  <!-- 样式等 -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<!-- public/index.html -->
+
+
+<body>
+  <!-- 启动画面 -->
+  <div id="startup-screen" style="
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    font-family: 'Segoe UI', sans-serif;
+  ">
+    <img src="/strlogo.png" alt="Logo" class="logo-bounce" style="width: 90px; height: 90px;" />
+    <div style="font-size: 14px; color: #555; margin-top: 16px;"></div>
+  </div>
+
+  <script>
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); } /* ← 跳动高度在这里改 */
+      }
+
+      .logo-bounce {
+        animation: bounce 1.4s ease-in-out infinite;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+  <div id="root"></div>
+
+  <!-- React 相关脚本 -->
+  <script src="bundle.js"></script>
+</body>
+</html>
