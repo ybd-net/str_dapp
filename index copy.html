@@ -2,8 +2,23 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>STR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>STR DApp</title>
+
+  <!-- 网站图标（标签页/收藏夹） -->
+  <link rel="icon" type="image/png" href="/strlogo.png" />
+  <link rel="shortcut icon" href="/strlogo.png" />
+  <link rel="apple-touch-icon" href="/strlogo.png" />
+  <link rel="shortcut icon" href="/strlogo.ico" />
+  <!-- PWA 支持（添加到主屏幕） -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- 社交媒体分享（微信/Telegram/Twitter等） -->
+  <meta property="og:title" content="STR" />
+  <meta property="og:description" content="STR 官方社区 DApp" />
+  <meta property="og:image" content="https://yourdomain.com/strlogo.png" />
+  <meta property="og:url" content="https://yourdomain.com" />
 
   <!-- --------------- 核心：首次打开强制首页 hash ---------------- -->
   <script>
@@ -12,13 +27,12 @@
         const firstVisit = !sessionStorage.getItem('firstVisit');
         if (firstVisit) {
           const hash = window.location.hash;
-          // 如果 hash 不是首页，立即替换为首页
           if (hash !== '#/' && hash !== '') {
             window.location.replace('#/');
           }
           sessionStorage.setItem('firstVisit', 'true');
         }
-      } catch(e) {
+      } catch (e) {
         console.warn('Hash 修正失败', e);
       }
     })();
@@ -27,8 +41,6 @@
   <!-- 样式等 -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-<!-- public/index.html -->
-
 
 <body>
   <!-- 启动画面 -->
@@ -43,7 +55,7 @@
     z-index: 99999;
     font-family: 'Segoe UI', sans-serif;
   ">
-    <img src="/strlogo.png" alt="Logo" class="logo-bounce" style="width: 90px; height: 90px;" />
+    <img src="/android-chrome-512x512.png" alt="Logo" class="logo-bounce" style="width: 90px; height: 90px;" />
     <div style="font-size: 14px; color: #555; margin-top: 16px;"></div>
   </div>
 
@@ -52,9 +64,8 @@
     style.innerHTML = `
       @keyframes bounce {
         0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); } /* ← 跳动高度在这里改 */
+        50% { transform: translateY(-20px); }
       }
-
       .logo-bounce {
         animation: bounce 1.4s ease-in-out infinite;
       }
