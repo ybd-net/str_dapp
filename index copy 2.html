@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>STR DApp</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+
+ 
+  <link rel="icon" type="image/png" href="/strlogo.png" />
+  <link rel="shortcut icon" href="/strlogo.png" />
+  <link rel="apple-touch-icon" href="/strlogo.png" />
+  <link rel="shortcut icon" href="/strlogo.ico" />
+
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:title" content="STR DApp" />
+  <meta property="og:site_name" content="STR DApp" />
+  <meta property="og:description" content="STR 官方社区 DApp" />
+  <meta property="og:image" content="https://yourdomain.com/strlogo.png" />
+  <meta property="og:url" content="https://yourdomain.com" />
+
+  <script>
+    (function() {
+      try {
+        const firstVisit = !sessionStorage.getItem('firstVisit');
+        if (firstVisit) {
+          const hash = window.location.hash;
+          if (hash !== '#/' && hash !== '') {
+            window.location.replace('#/');
+          }
+          sessionStorage.setItem('firstVisit', 'true');
+        }
+      } catch (e) {
+        console.warn('Hash 修正失败', e);
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="startup-screen" style="
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    font-family: 'Segoe UI', sans-serif;
+  ">
+    <img src="/android-chrome-512x512.png" alt="Logo" class="logo-bounce" style="width: 60px; height: 60px;" loading="lazy" />
+
+    <div style="font-size: 14px; color: #555; margin-top: 16px;"></div>
+  </div>
+<script>
+    // 100ms 后显示启动画面，让 <title> 先渲染
+    setTimeout(() => {
+      const screen = document.getElementById('startup-screen');
+      if (screen) screen.style.display = 'flex';
+    }, 100);
+  </script>
+  <script>
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+      .logo-bounce {
+        animation: bounce 1.4s ease-in-out infinite;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+  <div id="root"></div>
+  <script src="bundle.js"></script>
+</body>
+</html>
